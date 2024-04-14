@@ -32,11 +32,51 @@ function validarTelefono(){
     }
 }
 
+function validarCedula(){
+    let cedula = document.getElementById("cedula").value;
+    console.log(cedula);
+    let formato=/^[0-9]$/;
+    if(cedula == ""){
+       document.getElementById("errorTelefono").style.display="block";
+       document.getElementById("errorTelefono").innerHTML="El campo es obligattorio";
+    } 
+    else if(!formato.test(cedula)){
+        document.getElementById("errorCedula").style.display="block"; 
+        document.getElementById("errorCedula").innerHTML="Ingrese carácteres validos sin puntos ni comas";
+    }
+    else{ 
+       document.getElementById("errorCedula").style.display="none";
+    }
+}
+
+function calcularCosto(){
+const pcorriente = 6000;
+const pdecorado = 5000;
+const ptradicional = 2000;
+const pcupcake = 1000;
+const pbrazo = 5500;
+let total=0;
+let tcorriente = document.getElementById("corriente").value;
+let tdecorado = document.getElementById("decorado").value;
+let ttradicional = document.getElementById("tradicional").value;
+let tcupcake = document.getElementById("cupcake").value;
+let tbrazo = document.getElementById("brazo").value;
+
+total = (pcorriente * tcorriente) + (pdecorado*tdecorado)+(ptradicional*ttradicional)+(pcupcake*tcupcake)+(pbrazo*tbrazo);
+document.getElementById("total").value=total;
+}
+
+
 document.getElementById("nombre").addEventListener("blur",validarNombre);
 document.getElementById("telefono").addEventListener("blur",validarTelefono);
+document.getElementById("cedula").addEventListener("blur",validarCedula);
 
 function enviarFormulario(){
+    validarEntradas();
     console.log("Enviando Formulario")
+
+    calcularCosto();
+
 }
 function validarEntradas(){
     validarNombre();
